@@ -20,12 +20,12 @@ public class HomeActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_home);
 
-        buttonTry = findViewById(R.id.button01);
-        buttonTry.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this, IncomeActivity.class));
-            }
-        });
+//        buttonTry = findViewById(R.id.button01);
+//        buttonTry.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(HomeActivity.this, IncomeActivity.class));
+//            }
+//        });
     }
 }
