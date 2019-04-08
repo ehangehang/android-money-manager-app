@@ -1,52 +1,64 @@
 package com.example.moneymanagerapp.Adapter;
 
+import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
-public class HistoryAdapter {
-    private String incomeExpense;
-    private String category;
-    private String nominal;
-    private int imageHistory;
+import com.example.moneymanagerapp.R;
 
-    public HistoryAdapter(){
+import java.util.List;
+
+public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {
+
+    private List<HistoryAlbum> albumList;
+//    public String category1, value1;
+//
+//    category1 = getIntent().getExtras().getString("category", "null");
+//    value1 = getIntent().getExtras().getString("value", "0");
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        public TextView incomeExpense, category, nominal;
+        public ImageView imgCategory;
+
+        public ViewHolder(View itemView) {
+            super(itemView);
+            incomeExpense = (TextView) itemView.findViewById(R.id.incomeExpenseTv);
+            category = (TextView) itemView.findViewById(R.id.kategoriTextV);
+            nominal = (TextView) itemView.findViewById(R.id.nominalTextV);
+            imgCategory = (ImageView) itemView.findViewById(R.id.imageHistory);
+        }
     }
 
-    public HistoryAdapter(int imageHistory, String incomeExpense, String category, String nominal){
-        this.imageHistory = imageHistory;
-        this.incomeExpense = incomeExpense;
-        this.category = category;
-        this.nominal = nominal;
+    public HistoryAdapter(List<HistoryAlbum> albumList) {
+        this.albumList = albumList;
     }
 
-    public int getImageHistory() {
-        return imageHistory;
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        View itemView = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.item_history_cv, viewGroup, false);
+        ViewHolder vH = new ViewHolder(itemView);
+        return vH;
     }
 
-    public void setImageHistory(int imageHistory) {
-        this.imageHistory = imageHistory;
+    @Override
+    public void onBindViewHolder(ViewHolder viewHolder, int i) {
+        HistoryAlbum album = albumList.get(i);
+        viewHolder.incomeExpense.setText(album.getIncomeExpense());
+        viewHolder.imgCategory.setImageResource(album.getImageHistory());
+        viewHolder.category.setText(album.getCategory());
+        viewHolder.nominal.setText(album.getNominal());
     }
 
-    public String getIncomeExpense() {
-        return incomeExpense;
+    @Override
+    public int getItemCount() {
+        return albumList.size();
     }
 
-    public void setIncomeExpense(String incomeExpense) {
-        this.incomeExpense = incomeExpense;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public String getNominal() {
-        return nominal;
-    }
-
-    public void setNominal(String nominal) {
-        this.nominal = nominal;
-    }
 }
