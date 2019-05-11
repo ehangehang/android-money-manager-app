@@ -133,45 +133,45 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void incomeDialog() {
-        final Dialog dialog1 = new Dialog(HomeActivity.this, android.R.style.Theme_Black_NoTitleBar);
-        dialog1.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog1.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        dialog1.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#0000ffff")));
-        dialog1.setContentView(R.layout.item_income);
-
-        final EditText edtextCategory = (EditText) dialog1.findViewById(R.id.editTextCategory);
-        final EditText edtextValue = (EditText) dialog1.findViewById(R.id.editTextValue);
-
-        Button cancel1 = (Button) dialog1.findViewById(R.id.cancel);
-        Button proceed1 = (Button) dialog1.findViewById(R.id.proceed);
-
-        cancel1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog1.cancel();
-            }
-        });
-        proceed1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = getIntent();
-                intent.putExtra("category", String.valueOf(edtextCategory.getText()));
-                intent.putExtra("value", String.valueOf(edtextValue.getText()));
-                startActivity(intent);
-//                insertIncome(position);
-                dialog1.cancel();
-                finish();
-            }
-        });
-        dialog1.setCancelable(false);
-        dialog1.show();
+//        final Dialog dialog1 = new Dialog(HomeActivity.this, android.R.style.Theme_Black_NoTitleBar);
+//        dialog1.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        dialog1.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+//                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//
+//        dialog1.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#0000ffff")));
+//        dialog1.setContentView(R.layout.item_income);
+//
+//        final EditText edtextCategory = (EditText) dialog1.findViewById(R.id.editTextCategory);
+//        final EditText edtextValue = (EditText) dialog1.findViewById(R.id.editTextValue);
+//
+//        Button cancel1 = (Button) dialog1.findViewById(R.id.cancel);
+//        Button proceed1 = (Button) dialog1.findViewById(R.id.proceed);
+//
+//        cancel1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dialog1.cancel();
+//            }
+//        });
+//        proceed1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = getIntent();
+//                intent.putExtra("category", String.valueOf(edtextCategory.getText()));
+//                intent.putExtra("value", String.valueOf(edtextValue.getText()));
+//                startActivity(intent);
+////                insertIncome(position);
+//                dialog1.cancel();
+//                finish();
+//            }
+//        });
+//        dialog1.setCancelable(false);
+//        dialog1.show();
     }
 
     private void insertIncome(int position) {
-        albumList.add(0, new HistoryAlbum(R.drawable.award, "Income", category, value));
-        mAdapter.notifyItemInserted(position);
+//        albumList.add(0, new HistoryAlbum(R.drawable.award, "Income", category, value));
+//        mAdapter.notifyItemInserted(position);
     }
 
     private void setDrawerContent(NavigationView navigationView) {

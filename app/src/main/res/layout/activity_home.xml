@@ -30,8 +30,8 @@
                 android:id="@+id/garisTiga"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="40dp"
                 android:src="@drawable/garis_tiga"
                 android:background="@android:color/transparent"/>
 
