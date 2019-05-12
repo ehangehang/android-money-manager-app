@@ -52,10 +52,12 @@
                 android:layout_margin="20dp">
 
                 <EditText
+                    android:id="@+id/etCategoryEx"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Category"/>
                 <EditText
+                    android:id="@+id/etValuesEx"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="numberDecimal"
@@ -67,7 +69,7 @@
                     android:layout_marginTop="20dp">
 
                     <Button
-                        android:id="@+id/cancel"
+                        android:id="@+id/cancelEx"
                         android:layout_width="0dp"
                         android:layout_height="40dp"
                         android:layout_marginRight="5dp"
@@ -77,7 +79,7 @@
                         android:textColor="#FFF" />
 
                     <Button
-                        android:id="@+id/proceed"
+                        android:id="@+id/proceedEx"
                         android:layout_width="0dp"
                         android:layout_height="40dp"
                         android:layout_marginLeft="5dp"

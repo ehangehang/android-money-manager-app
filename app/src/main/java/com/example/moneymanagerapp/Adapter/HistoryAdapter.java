@@ -22,15 +22,13 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     private Context context;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView incomeExpense, category, nominal;
+        public TextView category, nominal;
         public ImageView imgCategory;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            incomeExpense = (TextView) itemView.findViewById(R.id.incomeExpenseTv);
             category = (TextView) itemView.findViewById(R.id.kategoriTextV);
             nominal = (TextView) itemView.findViewById(R.id.nominalTextV);
-            imgCategory = (ImageView) itemView.findViewById(R.id.imageHistory);
         }
     }
 
@@ -49,8 +47,10 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int i) {
-        final String category = daftarIncome.get(i).getCategory();
-        final String nominal = daftarIncome.get(i).getValues();
+        final String category1 = daftarIncome.get(i).getCategory();
+        final String nominal1 = daftarIncome.get(i).getValues();
+        viewHolder.category.setText(category1);
+        viewHolder.nominal.setText(nominal1);
 //        HistoryAlbum album = albumList.get(i);
 //        viewHolder.incomeExpense.setText(album.getIncomeExpense());
 //        viewHolder.imgCategory.setImageResource(album.getImageHistory());

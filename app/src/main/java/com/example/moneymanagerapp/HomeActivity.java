@@ -38,7 +38,7 @@ import java.util.ArrayList;
 public class HomeActivity extends AppCompatActivity {
 
     private ImageButton openNav;
-    private TextView income, expense, aboutUs, category1, value1, incomeExpense;
+    private TextView income, expense, aboutUs, category1, value1;
 
     private DrawerLayout drawer;
     private NavigationView navDrawer;
@@ -64,17 +64,24 @@ public class HomeActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_home);
 
-//        values = Integer.parseInt(getIntent().getExtras().getString("value"));
-
-        initializeViews();
-
-        database = FirebaseDatabase.getInstance().getReference();
+        income = findViewById(R.id.incomeMenuDrawer);
+        expense = findViewById(R.id.expenseMenuDrawer);
+        aboutUs = findViewById(R.id.aboutUsMenuDrawer);
+        openNav = findViewById(R.id.garisTiga);
+        drawer = findViewById(R.id.drawer);
+        navDrawer = findViewById(R.id.nvView);
+        category1 = findViewById(R.id.kategoriTextV);
+        value1 = findViewById(R.id.nominalTextV);
 
         navigationDrawer();
-//        createAlbumList();
 
-        buildRecyclerView();
+        mRecyclerView = findViewById(R.id.recyclerHistory);
+        mRecyclerView.setHasFixedSize(true);
 
+        mLayaoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayaoutManager);
+
+        database = FirebaseDatabase.getInstance().getReference();
         database.child("income").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -84,6 +91,8 @@ public class HomeActivity extends AppCompatActivity {
                     income.setKey(noteDataSnapshot.getKey());
                     daftarIncome.add(income);
                 }
+                mAdapter = new HistoryAdapter(daftarIncome, HomeActivity.this);
+                mRecyclerView.setAdapter(mAdapter);
             }
 
             @Override
@@ -96,41 +105,6 @@ public class HomeActivity extends AppCompatActivity {
 
     public static Intent getActIntent(Activity activity){
         return new Intent(activity, HomeActivity.class);
-    }
-
-    private void buildRecyclerView() {
-        mRecyclerView = findViewById(R.id.recyclerHistory);
-        mRecyclerView.setHasFixedSize(true);
-        mAdapter = new HistoryAdapter(daftarIncome, HomeActivity.this);
-        mLayaoutManager = new LinearLayoutManager(this);
-
-        mRecyclerView.setLayoutManager(mLayaoutManager);
-        mRecyclerView.setAdapter(mAdapter);
-    }
-
-    private void createAlbumList() {
-        if (category != null){
-            category = getIntent().getExtras().getString("category", "null");
-        }
-        if (value != null){
-            value = getIntent().getExtras().getString("value", "0");
-        }
-
-        daftarIncome = new ArrayList<>();
-//        albumList.add(new HistoryAlbum(R.drawable.coupon, "Income", category, value));
-
-    }
-
-    private void initializeViews() {
-        income = findViewById(R.id.incomeMenuDrawer);
-        expense = findViewById(R.id.expenseMenuDrawer);
-        aboutUs = findViewById(R.id.aboutUsMenuDrawer);
-        openNav = findViewById(R.id.garisTiga);
-        drawer = findViewById(R.id.drawer);
-        navDrawer = findViewById(R.id.nvView);
-        category1 = findViewById(R.id.kategoriTextV);
-        value1 = findViewById(R.id.nominalTextV);
-        incomeExpense = findViewById(R.id.incomeExpenseTv);
     }
 
     private void navigationDrawer() {
@@ -162,48 +136,6 @@ public class HomeActivity extends AppCompatActivity {
                 Toast.makeText(HomeActivity.this, "About Us Menu", Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    private void incomeDialog() {
-//        final Dialog dialog1 = new Dialog(HomeActivity.this, android.R.style.Theme_Black_NoTitleBar);
-//        dialog1.requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        dialog1.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-//                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-//
-//        dialog1.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#0000ffff")));
-//        dialog1.setContentView(R.layout.item_income);
-//
-//        final EditText edtextCategory = (EditText) dialog1.findViewById(R.id.editTextCategory);
-//        final EditText edtextValue = (EditText) dialog1.findViewById(R.id.editTextValue);
-//
-//        Button cancel1 = (Button) dialog1.findViewById(R.id.cancel);
-//        Button proceed1 = (Button) dialog1.findViewById(R.id.proceed);
-//
-//        cancel1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                dialog1.cancel();
-//            }
-//        });
-//        proceed1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = getIntent();
-//                intent.putExtra("category", String.valueOf(edtextCategory.getText()));
-//                intent.putExtra("value", String.valueOf(edtextValue.getText()));
-//                startActivity(intent);
-////                insertIncome(position);
-//                dialog1.cancel();
-//                finish();
-//            }
-//        });
-//        dialog1.setCancelable(false);
-//        dialog1.show();
-    }
-
-    private void insertIncome(int position) {
-//        albumList.add(0, new HistoryAlbum(R.drawable.award, "Income", category, value));
-//        mAdapter.notifyItemInserted(position);
     }
 
     private void setDrawerContent(NavigationView navigationView) {

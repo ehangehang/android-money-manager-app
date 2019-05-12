@@ -63,6 +63,7 @@ public class IncomeActivity extends AppCompatActivity {
                             getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(
                             etCategory.getWindowToken(), 0);
+                    startActivity(new Intent(IncomeActivity.this, HomeActivity.class));
                 }
             });
 //        }
