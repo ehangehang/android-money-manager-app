@@ -1,9 +1,11 @@
 package com.example.moneymanagerapp;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +26,12 @@ import android.widget.Toast;
 
 import com.example.moneymanagerapp.Adapter.HistoryAdapter;
 import com.example.moneymanagerapp.Adapter.HistoryAlbum;
+import com.example.moneymanagerapp.Class.Income;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -44,7 +52,9 @@ public class HomeActivity extends AppCompatActivity {
 
     private int values;
 
-    ArrayList<HistoryAlbum> albumList;
+    private DatabaseReference database;
+
+    ArrayList<Income> daftarIncome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,16 +68,40 @@ public class HomeActivity extends AppCompatActivity {
 
         initializeViews();
 
+        database = FirebaseDatabase.getInstance().getReference();
+
         navigationDrawer();
-        createAlbumList();
+//        createAlbumList();
 
         buildRecyclerView();
 
+        database.child("income").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                daftarIncome = new ArrayList<>();
+                for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()){
+                    Income income = noteDataSnapshot.getValue(Income.class);
+                    income.setKey(noteDataSnapshot.getKey());
+                    daftarIncome.add(income);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                System.out.println(databaseError.getDetails()+" "+databaseError.getMessage());
+            }
+        });
+
     }
+
+    public static Intent getActIntent(Activity activity){
+        return new Intent(activity, HomeActivity.class);
+    }
+
     private void buildRecyclerView() {
         mRecyclerView = findViewById(R.id.recyclerHistory);
         mRecyclerView.setHasFixedSize(true);
-        mAdapter = new HistoryAdapter(albumList);
+        mAdapter = new HistoryAdapter(daftarIncome, HomeActivity.this);
         mLayaoutManager = new LinearLayoutManager(this);
 
         mRecyclerView.setLayoutManager(mLayaoutManager);
@@ -82,8 +116,7 @@ public class HomeActivity extends AppCompatActivity {
             value = getIntent().getExtras().getString("value", "0");
         }
 
-        albumList = new ArrayList<>();
-        albumList.add(new HistoryAlbum(R.drawable.award, "Income", "Award", "200000"));
+        daftarIncome = new ArrayList<>();
 //        albumList.add(new HistoryAlbum(R.drawable.coupon, "Income", category, value));
 
     }
@@ -112,15 +145,14 @@ public class HomeActivity extends AppCompatActivity {
         income.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                startActivity(new Intent(HomeActivity.this, IncomeActivity.class));
-                incomeDialog();
+                startActivity(IncomeActivity.getActIntent(HomeActivity.this));
             }
         });
 
         expense.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(HomeActivity.this, "Expense Menu", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(HomeActivity.this, ExpenseActivity.class));
             }
         });
 

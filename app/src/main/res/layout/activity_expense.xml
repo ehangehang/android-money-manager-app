@@ -21,7 +21,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:text="Income"
+                android:text="Expense"
                 android:textColor="#fff"
                 android:textSize="20sp" />
 
@@ -52,12 +52,10 @@
                 android:layout_margin="20dp">
 
                 <EditText
-                    android:id="@+id/etCategory"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Category"/>
                 <EditText
-                    android:id="@+id/etValues"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="numberDecimal"

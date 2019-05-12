@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "515503323304",
+    "firebase_url": "https://digletdigitalwallet.firebaseio.com",
+    "project_id": "digletdigitalwallet",
+    "storage_bucket": "digletdigitalwallet.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:515503323304:android:538a6ddeb086cd23",
+        "android_client_info": {
+          "package_name": "com.example.moneymanagerapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "515503323304-4fer33om9droi4pfj31lbhkgoaqk2jpu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.moneymanagerapp",
+            "certificate_hash": "f43014a9105ee149f5ba5d31eb833ed199b9cae1"
+          }
+        },
+        {
+          "client_id": "515503323304-atk8hfd2llvpvd27im4h9uv5ak2hfn5l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRlFTmP9KfZMsjqF0B8ddI7tav41uG5os"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "515503323304-atk8hfd2llvpvd27im4h9uv5ak2hfn5l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

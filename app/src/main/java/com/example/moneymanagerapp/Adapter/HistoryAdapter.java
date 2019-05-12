@@ -9,17 +9,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.moneymanagerapp.Class.Income;
 import com.example.moneymanagerapp.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {
 
-    private List<HistoryAlbum> albumList;
-//    public String category1, value1;
-//
-//    category1 = getIntent().getExtras().getString("category", "null");
-//    value1 = getIntent().getExtras().getString("value", "0");
+    private ArrayList<Income> daftarIncome;
+
+    private Context context;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView incomeExpense, category, nominal;
@@ -34,11 +34,11 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         }
     }
 
-    public HistoryAdapter(List<HistoryAlbum> albumList) {
-        this.albumList = albumList;
+    public HistoryAdapter(ArrayList<Income> incomes, Context context1) {
+        daftarIncome = incomes;
+        context = context1;
     }
 
-    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View itemView = LayoutInflater.from(viewGroup.getContext())
@@ -48,17 +48,19 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        HistoryAlbum album = albumList.get(i);
-        viewHolder.incomeExpense.setText(album.getIncomeExpense());
-        viewHolder.imgCategory.setImageResource(album.getImageHistory());
-        viewHolder.category.setText(album.getCategory());
-        viewHolder.nominal.setText(album.getNominal());
+    public void onBindViewHolder(ViewHolder viewHolder, final int i) {
+        final String category = daftarIncome.get(i).getCategory();
+        final String nominal = daftarIncome.get(i).getValues();
+//        HistoryAlbum album = albumList.get(i);
+//        viewHolder.incomeExpense.setText(album.getIncomeExpense());
+//        viewHolder.imgCategory.setImageResource(album.getImageHistory());
+//        viewHolder.category.setText(album.getCategory());
+//        viewHolder.nominal.setText(album.getNominal());
     }
 
     @Override
     public int getItemCount() {
-        return albumList.size();
+        return daftarIncome.size();
     }
 
 }
